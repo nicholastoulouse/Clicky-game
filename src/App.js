@@ -54,7 +54,7 @@ class App extends Component {
         if(index%cols==0){
           return ([<div class='row'>,<img src={"./images/" + url} className="square" alt="pixar characters" onClick={() => this.clickImage(index)} />]);
         } else if(index%cols == 3){
-          return ([<img src={"./images/" + url} className="square" alt="pixar characters" onClick={() => this.clickImage(index)} />,</div>]);
+          return (<><img src={"./images/" + url} className="square" alt="pixar characters" onClick={() => this.clickImage(index)} />,</div></>);
         } else {
           return (<img src={"./images/" + url} className="square" alt="pixar characters" onClick={() => this.clickImage(index)} />);
         }
@@ -66,12 +66,13 @@ class App extends Component {
   );
 }
 }
+export default App;
 /*
 ReactDOM.render(
   <Products products={ [1, 2, 3, 4, 5, 6, 7 ] } />,
   document.getElementById('container')
 );
-*/
+
 const Gameboard = (props) => {
   const numRows = [...Array( Math.ceil(props.imagefiles.length / 4) )];
   const boardRows = numRows.map( (row, i) => props.imagefiles.slice(i * 4, i * 4 + 4) );
@@ -86,5 +87,5 @@ const Gameboard = (props) => {
     </div>
   );
 }
+*/
 
-export default App;
