@@ -49,18 +49,7 @@ class App extends Component {
       <header className="App-header">
         <a className="App-link" href="https://www.pixar.com/" target="_blank" rel="noopener noreferrer">Pixar Actors</a>
       </header>
-      <div className="container">
-      { this.images.map((url, index) => {
-        if(index%cols==0){
-          return ([<div class='row'>,<img src={"./images/" + url} className="square" alt="pixar characters" onClick={() => this.clickImage(index)} />]);
-        } else if(index%cols == 3){
-          return (<><img src={"./images/" + url} className="square" alt="pixar characters" onClick={() => this.clickImage(index)} />,</div></>);
-        } else {
-          return (<img src={"./images/" + url} className="square" alt="pixar characters" onClick={() => this.clickImage(index)} />);
-        }
-      })
-      }
-      </div>
+      <div className="container"></div>
       <footer>This is the footer</footer>
     </div>
   );
@@ -68,24 +57,38 @@ class App extends Component {
 }
 export default App;
 /*
-ReactDOM.render(
-  <Products products={ [1, 2, 3, 4, 5, 6, 7 ] } />,
-  document.getElementById('container')
-);
-
-const Gameboard = (props) => {
-  const numRows = [...Array( Math.ceil(props.imagefiles.length / 4) )];
-  const boardRows = numRows.map( (row, i) => props.imagefiles.slice(i * 4, i * 4 + 4) );
-  const content = boardRows.map((row, idx) => (
-        <div className="row" key={idx}>    
-        { row.map( url => <img src={"./images/" + url} className="square" alt="pixar characters" onClick={() => this.clickImage(index)} /> )}
-        </div> )
+{ this.images.map((url, index) => {
+  if(index%cols==0){
+    return ([<div class='row'>,<img src={"./images/" + url} className="square" alt="pixar characters" onClick={() => this.clickImage(index)} />]);
+  } else if(index%cols == 3){
+    return (<><img src={"./images/" + url} className="square" alt="pixar characters" onClick={() => this.clickImage(index)} />,</div></>);
+  } else {
+    return (<img src={"./images/" + url} className="square" alt="pixar characters" onClick={() => this.clickImage(index)} />);
+  }
+})
+}
+=======================================================
+*/
+const Gameboard = (props) => { // [0,1,2,3,4,5,6,7,8,9,10];
+  //shuffle your props array first
+  let imgsArray = props.images.sort(() => Math.random() - 0.5);
+  const numRows = [...Array( Math.ceil(imgsArray.length / 4) )]; // 3 rows; make an outer array of length # rows with undefined values
+  const boardRows = numRows.map( (row, i) => imgsArray.slice(i * 4, i * 4 + 4) ); // 4 cols; make a 2D array of inner column arrays for # rows in outer array
+  const boardLayout = boardRows.map((row, idx) => ( //idx:  0, 1, 2
+    <div className="row">
+      { row.map( (filename) => <img src={"./images/" + filename + ".jpg"} className="square" alt="pixar characters" onClick={() => this.clickImage(filename)} /> )}
+    </div> )
   );
   return (
     <div>
-        {content}
+        {boardLayout}
     </div>
   );
 }
-*/
+
+ReactDOM.render(
+  <Gameboard images={ ["0.jpg","1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","10.jpg","11.jpg"] } />,
+  document.getElementById('container')
+);
+
 
