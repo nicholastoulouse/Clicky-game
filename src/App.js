@@ -3,6 +3,43 @@ import logo from './logo.svg';
 // import headshots from '../public/images';
 import './App.css';
 
+class Card extends Component {
+  render() {
+    return (
+      <img src={"./images/" + filename + ".jpg"} className="square" alt="pixar characters" onClick={() => this.props.trackScore(filename)} />
+    );
+  }
+}
+
+class Gameboard extends Component {
+  constructor(){
+    super();
+    this.state = {
+      won: false,
+      lost: false
+    }
+  }
+  resetGame = () => {
+    prompt("Do you want to play again?")
+  }
+  render(){
+    this.props.images.sort(() => Math.random() - 0.5);
+    const cols = 4;
+    const numRows = [...Array( Math.ceil(this.props.images.length / cols) )]; // 3 rows; make an outer array of length # rows with undefined values
+    const boardRows = numRows.map( (row, i) => this.props.images.slice(i * cols, i * cols + cols) ); // 4 cols; make a 2D array of inner column arrays for # rows in outer array
+    const boardLayout = boardRows.map((row, idx) => (
+      <div className="row">
+        { row.map( (filename) => <Card src={filename} trackScore={this.props.trackScore} /> )}
+      </div> )
+    );
+  return (
+    <div>
+        {boardLayout}
+    </div>
+  );
+  }
+}
+
 class App extends Component {
 
   constructor(){
@@ -42,43 +79,6 @@ class App extends Component {
       <footer>This is the footer</footer>
     </div>
   );
-}
-
-class Gameboard extends Component {
-  constructor(){
-    super();
-    this.state = {
-      won: false,
-      lost: false
-    }
-  }
-  resetGame = () => {
-    prompt("Do you want to play again?")
-  }
-  render(){
-    this.props.images.sort(() => Math.random() - 0.5);
-    const cols = 4;
-    const numRows = [...Array( Math.ceil(this.props.images.length / cols) )]; // 3 rows; make an outer array of length # rows with undefined values
-    const boardRows = numRows.map( (row, i) => this.props.images.slice(i * cols, i * cols + cols) ); // 4 cols; make a 2D array of inner column arrays for # rows in outer array
-    const boardLayout = boardRows.map((row, idx) => (
-      <div className="row">
-        { row.map( (filename) => <Card src={filename} trackScore={this.props.trackScore} /> )}
-      </div> )
-    );
-  return (
-    <div>
-        {boardLayout}
-    </div>
-  );
-  }
-}
-
-class Card extends Component {
-  render() {
-    return (
-      <img src={"./images/" + filename + ".jpg"} className="square" alt="pixar characters" onClick={() => this.props.trackScore(filename)} />
-    );
-  }
 }
 
 export default App;
