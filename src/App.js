@@ -15,7 +15,7 @@ class App extends Component {
     }
   }
 
-  clickImage = (index) => {
+  trackScore = (index) => {
     let imgName = index + '.jpg'; // make the name of the image file based on array index
     let points = parseInt(this.state.score);  // get the score from state
     let imgIncr = {...this.state.imgclicked}; // create a copy
@@ -37,29 +37,48 @@ class App extends Component {
         <a className="App-link" href="https://www.pixar.com/" target="_blank" rel="noopener noreferrer">Pixar Actors</a>
       </header>
       <div className="container">
-        <Gameboard trackScore={this.clickImage} images={[0,1,2,3,4,5,6,7,8,9,10]} />
+        <Gameboard trackScore={this.trackScore} images={[0,1,2,3,4,5,6,7,8,9,10]} />
       </div>
       <footer>This is the footer</footer>
     </div>
   );
 }
 
-const Gameboard = (props) => {
-  
-  props.images.sort(() => Math.random() - 0.5);
-  const cols = 4;
-  const numRows = [...Array( Math.ceil(imgsArray.length / cols) )]; // 3 rows; make an outer array of length # rows with undefined values
-  const boardRows = numRows.map( (row, i) => imgsArray.slice(i * cols, i * cols + cols) ); // 4 cols; make a 2D array of inner column arrays for # rows in outer array
-  const boardLayout = boardRows.map((row, idx) => (
-    <div className="row">
-      { row.map( (filename) => <img src={"./images/" + filename + ".jpg"} className="square" alt="pixar characters" onClick={() => this.props.trackScore(filename)} /> )}
-    </div> )
-  );
+class Gameboard extends Component {
+  constructor(){
+    super();
+    this.state = {
+      won: false,
+      lost: false
+    }
+  }
+  resetGame = () => {
+    prompt("Do you want to play again?")
+  }
+  render(){
+    this.props.images.sort(() => Math.random() - 0.5);
+    const cols = 4;
+    const numRows = [...Array( Math.ceil(this.props.images.length / cols) )]; // 3 rows; make an outer array of length # rows with undefined values
+    const boardRows = numRows.map( (row, i) => this.props.images.slice(i * cols, i * cols + cols) ); // 4 cols; make a 2D array of inner column arrays for # rows in outer array
+    const boardLayout = boardRows.map((row, idx) => (
+      <div className="row">
+        { row.map( (filename) => <Card src={filename} trackScore={this.props.trackScore} /> )}
+      </div> )
+    );
   return (
     <div>
         {boardLayout}
     </div>
   );
+  }
+}
+
+class Card extends Component {
+  render() {
+    return (
+      <img src={"./images/" + filename + ".jpg"} className="square" alt="pixar characters" onClick={() => this.props.trackScore(filename)} />
+    );
+  }
 }
 
 export default App;
