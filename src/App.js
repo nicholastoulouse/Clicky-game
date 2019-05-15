@@ -6,7 +6,7 @@ import './App.css';
 class Card extends Component {
   render() {
     return (
-      <img src={"./images/" + filename + ".jpg"} className="square" alt="pixar characters" onClick={() => this.props.trackScore(filename)} />
+      <img src={"./images/" + this.props.filename + ".jpg"} className="square" alt="pixar characters" onClick={() => this.props.trackScore(this.props.filename)} />
     );
   }
 }
@@ -23,13 +23,13 @@ class Gameboard extends Component {
     prompt("Do you want to play again?")
   }
   render(){
-    this.props.images.sort(() => Math.random() - 0.5);
+    this.props.images.sort(() => Math.random() - 0.5); // shuffle the images array
     const cols = 4;
     const numRows = [...Array( Math.ceil(this.props.images.length / cols) )]; // 3 rows; make an outer array of length # rows with undefined values
     const boardRows = numRows.map( (row, i) => this.props.images.slice(i * cols, i * cols + cols) ); // 4 cols; make a 2D array of inner column arrays for # rows in outer array
     const boardLayout = boardRows.map((row, idx) => (
       <div className="row">
-        { row.map( (filename) => <Card src={filename} trackScore={this.props.trackScore} /> )}
+        { row.map( (idx) => <Card filename={idx} trackScore={this.props.trackScore} /> )}
       </div> )
     );
   return (
@@ -73,12 +73,12 @@ class App extends Component {
       <header className="App-header">
         <a className="App-link" href="https://www.pixar.com/" target="_blank" rel="noopener noreferrer">Pixar Actors</a>
       </header>
-      <div className="container">
+      <div className="App container">
         <Gameboard trackScore={this.trackScore} images={[0,1,2,3,4,5,6,7,8,9,10]} />
       </div>
-      <footer>This is the footer</footer>
     </div>
   );
+}
 }
 
 export default App;
