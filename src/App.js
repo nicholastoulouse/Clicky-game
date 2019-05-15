@@ -74,7 +74,7 @@ class App extends Component {
         <a className="App-link" href="https://www.pixar.com/" target="_blank" rel="noopener noreferrer">Pixar Actors</a>
       </header>
       <div className="App container">
-        <Gameboard trackScore={this.trackScore} images={[0,1,2,3,4,5,6,7,8,9,10]} />
+        <Gameboard trackScore={this.trackScore} images={[0,1,2,3,4,5,6,7,8,9,10,11]} />
       </div>
     </div>
   );
