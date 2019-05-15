@@ -29,7 +29,7 @@ class Gameboard extends Component {
     const boardRows = numRows.map( (row, i) => this.props.images.slice(i * cols, i * cols + cols) ); // 4 cols; make a 2D array of inner column arrays for # rows in outer array
     const boardLayout = boardRows.map((row, idx) => (
       <div className="row">
-        { row.map( (idx) => <Card filename={idx} trackScore={this.props.trackScore} /> )}
+        { row.map( (pictureName) => <Card filename={pictureName} trackScore={this.props.trackScore} /> )}
       </div> )
     );
   return (
