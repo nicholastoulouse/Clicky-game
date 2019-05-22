@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+
+import ReactDOM from 'react-dom';
+
+
 import logo from './logo.svg';
-// import headshots from '../public/images';
+
 import './App.css';
+
+import Toolbar from './components/Toolbar/Toolbar';
+
+
 
 class Card extends Component {
   render() {
@@ -51,7 +59,7 @@ class App extends Component {
       }
     }
   }
-
+ 
   trackScore = (index) => {
     let imgName = index + '.jpg'; // make the name of the image file based on array index
     let points = parseInt(this.state.score);  // get the score from state
@@ -64,15 +72,19 @@ class App extends Component {
     } else if(imgIncr[imgName] === 1){ // user has clicked an image twice
       points -= 1; // decrement score
       this.setState({ score: points });
+      if (points < 1) {
+        
+        alert('Game Over');
+      }
     }
   }
   
   render(){
   return (
+    
     <div className="App">
-      <header className="App-header">
-        <a className="App-link" href="https://www.pixar.com/" target="_blank" rel="noopener noreferrer">Pixar Actors</a>
-      </header>
+    
+      <Toolbar  result = {this.state.score} />
       <div className="App container">
         <Gameboard trackScore={this.trackScore} images={[0,1,2,3,4,5,6,7,8,9,10,11]} />
       </div>
@@ -80,5 +92,6 @@ class App extends Component {
   );
 }
 }
+
 
 export default App;

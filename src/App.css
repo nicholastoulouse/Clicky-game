@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
@@ -34,7 +34,7 @@
 
 body,
 .container {
-  position: absolute;
+  position: static;
   top: 0;
   left: 0;
   width: 100%;
@@ -54,6 +54,8 @@ body,
   -ms-flex-direction: column;
   -o-flex-direction: column;
   flex-direction: column;
+  margin-top: 70px;
+  
 }
 
 .row {
@@ -73,6 +75,8 @@ body,
   -ms-flex-direction: row;
   -o-flex-direction: row;
   flex-direction: row;
+  background-color: gray;
+  padding: 5px 30px;
 }
 
 .square {
@@ -98,16 +102,14 @@ body,
   -ms-flex-flow: column wrap;
   -o-flex-flow: column wrap;
   flex-flow: column wrap;
+  border : 10px solid white;
+  border-radius: 30px;
+  box-shadow:   10px 5px black ;
 }
 
-header, footer {
-  color: black;
-  height: 50px;
-  width: 100%;
-}
 img {
   margin: 15px;
   border: 1px solid black;
-  width: 288px;
-  height: 288px;
+  width: 270px;
+  height: 270px;
 }
