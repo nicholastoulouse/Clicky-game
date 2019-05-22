@@ -1,0 +1,38 @@
+.toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background:rgb(4, 4, 100);
+}
+.toolbar_navBar {
+    display: flex;
+    align-items: center;
+    padding: 0 30px; 
+    height: 70px;
+}
+.toolbar_logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+}
+.space {
+    flex: 1;
+}
+.toolbar_navBarItem ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    color: white;
+    font-size: 30px;
+    font-weight: bolder;
+}
+.toolbar_navBarItem li {
+    padding: 0 20px;
+}
+.toolbar_navBarItem a {
+    
+    text-decoration: none;
+}
